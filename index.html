@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julio Cesar Quispe Garrido | Ingeniero de Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        dark: { 950: '#050508', 900: '#0a0a10', 800: '#0f0f18', 700: '#161622', 600: '#1c1c2a' },
+                        cyan: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
+                        emerald: { 400: '#34d399', 500: '#10b981' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Space Grotesk', sans-serif; box-sizing: border-box; }
+        body { background: #050508; color: #ffffff; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a10; }
+        ::-webkit-scrollbar-thumb { background: #1c1c2a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+        .glass {
+            background: rgba(16, 16, 26, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(16, 16, 26, 0.8) 0%, rgba(22, 22, 34, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 40%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-alt {
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        #tsparticles { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
+        html { scroll-behavior: smooth; }
+        section[id] { scroll-margin-top: 100px; }
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn-glow:hover::before { left: 100%; }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.3), 0 0 60px rgba(34, 211, 238, 0.1);
+            transform: translateY(-2px);
+        }
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(34, 211, 238, 0.08);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #22d3ee;
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+        }
+        .hero-gradient {
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.15), transparent),
+                        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(16, 185, 129, 0.08), transparent),
+                        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(34, 211, 238, 0.05), transparent);
+        }
+        .section-gradient { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.05), transparent); }
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        .line-glow { height: 1px; background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), transparent); }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { motion, useInView, useScroll, useTransform, AnimatePresence } = Motion;
+
+        // Particles Background
+        const ParticlesBackground = () => {
+            const particlesInit = async () => {
+                await tsParticles.load("tsparticles", {
+                    fullScreen: false, background: { color: { value: "transparent" } }, fpsLimit: 60,
+                    particles: {
+                        number: { value: 80, density: { enable: true, area: 1000 } },
+                        color: { value: ["#22d3ee", "#06b6d4", "#34d399", "#10b981"] },
+                        shape: { type: "circle" },
+                        opacity: { value: { min: 0.1, max: 0.5 }, animation: { enable: true, speed: 0.5, minimumValue: 0.1 } },
+                        size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5 } },
+                        links: { enable: true, distance: 150, color: "#22d3ee", opacity: 0.15, width: 1 },
+                        move: { enable: true, speed: 0.8, direction: "none", random: true, straight: false, outModes: { default: "bounce" } },
+                    },
+                    interactivity: {
+                        detectsOn: "canvas", events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" } },
+                        modes: { grab: { distance: 180, links: { opacity: 0.4 } }, push: { quantity: 2 } },
+                    },
+                    detectRetina: true,
+                });
+            };
+            useEffect(() => { particlesInit(); }, []);
+            return <div id="tsparticles"></div>;
+        };
+
+        // Navigation
+        const Navigation = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileOpen, setMobileOpen] = useState(false);
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+            const navLinks = ['Sobre Mí', 'Tech Stack', 'Proyectos', 'Servicios', 'Contacto'];
+            const handleNavClick = (e, link) => {
+                e.preventDefault();
+                const idMap = { 'sobre mí': 'about', 'tech stack': 'tech-stack', 'proyectos': 'projects', 'servicios': 'services', 'contacto': 'contact' };
+                const id = idMap[link.toLowerCase()] || link.toLowerCase();
+                const element = document.getElementById(id);
+                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setMobileOpen(false);
+            };
+            return (
+                <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass py-4' : 'py-6'}`}>
+                    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                        <motion.a href="#" className="text-xl font-bold tracking-tight" whileHover={{ scale: 1.05 }} onClick={(e) => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}) }}>
+                            <span className="gradient-text">JQ</span><span className="text-white/80">.dev</span>
+                        </motion.a>
+                        <div className="hidden md:flex items-center gap-8">
+                            {navLinks.map((link, i) => (
+                                <motion.a key={link} href="#" onClick={(e) => handleNavClick(e, link)} className="text-sm text-white/60 hover:text-cyan-400 transition-colors relative group cursor-pointer" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                                    {link}<span className="absolute -bottom-1 left-0 w-0 h-px bg-cyan-400 transition-all duration-300 group-hover:w-full" />
+                                </motion.a>
+                            ))}
+                        </div>
+                        <button className="md:hidden text-white/80" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{mobileOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}</svg>
+                        </button>
+                    </div>
+                    <AnimatePresence>
+                        {mobileOpen && (
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden glass mt-4 mx-6 rounded-2xl overflow-hidden">
+                                <div className="p-6 flex flex-col gap-4">{navLinks.map((link) => (<a key={link} href="#" className="text-white/60 hover:text-cyan-400 transition-colors py-2" onClick={(e) => handleNavClick(e, link)}>{link}</a>))}</div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.nav>
+            );
+        };
+
+        // Hero
+        const Hero = () => {
+            const containerRef = useRef(null);
+            const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+            const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+            const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+            return (
+                <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
+                    <ParticlesBackground />
+                    <motion.div style={{ y, opacity }} className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}>
+                            <motion.div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /><span className="text-sm text-white/60">Disponible para nuevos proyectos</span>
+                            </motion.div>
+                            <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+                                <span className="gradient-text-alt">Julio Cesar</span><br /><span className="gradient-text">Quispe Garrido</span>
+                            </motion.h1>
+                            <motion.p className="text-lg md:text-xl text-cyan-400 font-medium mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>Ingeniero de Software | IA | Automatización | SQL</motion.p>
+                            <motion.p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>Construyo sistemas inteligentes que automatizan procesos, analizan datos y transforman la información empresarial en decisiones estratégicas.</motion.p>
+                            <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+                                <motion.a href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }) }} className="btn-glow px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold cursor-pointer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>Ver Proyectos</motion.a>
+                                <motion.a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }} className="btn-glow px-8 py-4 rounded-xl glass text-white/80 font-semibold border border-white/10 hover:border-cyan-400/50 cursor-pointer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>Contáctame</motion.a>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
+                    <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+                    </motion.div>
+                </section>
+            );
+        };
+
+        // About
+        const About = () => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+            return (
+                <section id="about" className="relative py-32 section-gradient">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+                            <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Sobre Mí</span>
+                            <h2 className="text-4xl md:text-5xl font-bold mb-8"><span className="gradient-text">Creando Soluciones</span><br /><span className="gradient-text-alt">Inteligentes</span></h2>
+                            <div className="grid md:grid-cols-2 gap-12 items-center">
+                                <div className="space-y-6">
+                                    <p className="text-lg text-white/60 leading-relaxed">Soy ingeniero de software especializado en construir sistemas inteligentes que transforman la forma en que las empresas operan. Mi enfoque está en desarrollar soluciones de automatización, pipelines de análisis de datos y aplicaciones potenciadas con IA.</p>
+                                    <p className="text-lg text-white/60 leading-relaxed">Con experiencia en Python, SQL y herramientas modernas de datos, creo sistemas que automatizan tareas repetitivas, extraen insights de conjuntos de datos complejos y potencian la toma de decisiones a través de dashboards interactivos.</p>
+                                    <div className="pt-6">
+                                        <div className="line-glow w-20 mb-6" />
+                                        <div className="grid grid-cols-3 gap-6">
+                                            {[ { num: '50+', label: 'Proyectos Completados' }, { num: '3+', label: 'Años de Experiencia' }, { num: '20+', label: 'Clientes' }].map((stat, i) => (
+                                                <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.1 }}>
+                                                    <span className="text-3xl font-bold gradient-text">{stat.num}</span><p className="text-white/40 text-sm mt-1">{stat.label}</p>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                <motion.div className="glass-card rounded-3xl p-8" initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.3 }}>
+                                    <h3 className="text-xl font-semibold mb-6 gradient-text">Experiencia Principal</h3>
+                                    <div className="space-y-4">
+                                        {[ { title: 'Desarrollo en Python', level: 95 }, { title: 'SQL y Diseño de Bases de Datos', level: 90 }, { title: 'Análisis de Datos & ETL', level: 88 }, { title: 'IA y Machine Learning', level: 82 }, { title: 'Desarrollo de Dashboards', level: 85 }].map((skill, i) => (
+                                            <div key={skill.title}>
+                                                <div className="flex justify-between text-sm mb-2"><span className="text-white/70">{skill.title}</span><span className="text-cyan-400">{skill.level}%</span></div>
+                                                <div className="h-1.5 bg-dark-700 rounded-full overflow-hidden"><motion.div className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full" initial={{ width: 0 }} animate={isInView ? { width: `${skill.level}%` } : {}} transition={{ delay: 0.5 + i * 0.1, duration: 1, ease: [0.4, 0, 0.2, 1] }} /></div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Tech Stack
+        const TechStack = () => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+            const categories = [
+                { title: 'Lenguajes', items: [{ name: 'Python', icon: '🐍' }, { name: 'SQL', icon: '🗃️' }, { name: 'JavaScript', icon: '⚡' }] },
+                { title: 'Automatización y Datos', items: [{ name: 'Pandas', icon: '🐼' }, { name: 'ETL', icon: '🔄' }, { name: 'Automatización Excel', icon: '📊' }, { name: 'Análisis de Datos', icon: '📈' }] },
+                { title: 'IA y ML', items: [{ name: 'Machine Learning', icon: '🤖' }, { name: 'Generative AI', icon: '✨' }, { name: 'Automatización Inteligente', icon: '🧠' }] },
+                { title: 'Desarrollo', items: [{ name: 'Streamlit', icon: '🎯' }, { name: 'REST APIs', icon: '🔌' }, { name: 'Dashboards', icon: '📉' }] },
+            ];
+            return (
+                <section id="tech-stack" className="relative py-32">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-16">
+                            <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Tech Stack</span>
+                            <h2 className="text-4xl md:text-5xl font-bold gradient-text">Tecnologías que Utilizo</h2>
+                        </motion.div>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {categories.map((category, ci) => (
+                                <motion.div key={category.title} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: ci * 0.1, duration: 0.6 }} className="glass-card rounded-2xl p-6 card-hover">
+                                    <h3 className="text-lg font-semibold mb-6 text-white/90">{category.title}</h3>
+                                    <div className="space-y-3">{category.items.map((item) => (<motion.div key={item.name} className="flex items-center gap-3 p-3 rounded-xl bg-dark-800/50 border border-white/5 hover:border-cyan-400/30 transition-all duration-300 cursor-default group" whileHover={{ x: 4 }}><span className="text-2xl group-hover:scale-110 transition-transform">{item.icon}</span><span className="text-white/70 group-hover:text-white transition-colors">{item.name}</span></motion.div>))}</div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Projects
+        const Projects = () => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+            const projects = [
+                { title: 'Dashboard Inteligente de Control Logístico', description: 'Dashboard empresarial construido para monitorear operaciones logísticas en tiempo real, automatizar reportes y generar alertas inteligentes.', tech: ['Python', 'SQL', 'Pandas', 'Streamlit'], featured: true, image: 'https://z-cdn-media.chatglm.cn/files/86d30e9d-3b70-4b83-a7b6-fc9bdbd81475.png?auth_key=1873026105-d6d114e1ef0641a7b2f39f6dca5f5b80-0-f0d3180fefb312b1f4c3649c6c82c235', demo: 'https://sistema-logistico.streamlit.app', github: 'https://github.com/Julio-73/Sistema-Inteligente-de-Control-Operativo-Log-stico-' },
+                { title: 'Generador Automatizado de Reportes', description: 'Sistema que automatiza la creación y distribución de reportes empresariales, reduciendo el trabajo manual en 80%.', tech: ['Python', 'Excel', 'Email API'], gradient: 'from-emerald-500/20 to-cyan-500/20', github: 'https://github.com/Julio-73' },
+                { title: 'Pipeline de Análisis de Datos', description: 'Pipeline ETL para procesar y analizar grandes volúmenes de datos, generando insights accionables para el negocio.', tech: ['Python', 'Pandas', 'SQL', 'PostgreSQL'], gradient: 'from-cyan-500/20 to-blue-500/20', github: 'https://github.com/Julio-73' },
+            ];
+            return (
+                <section id="projects" className="relative py-32 section-gradient">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-16">
+                            <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Proyectos</span>
+                            <h2 className="text-4xl md:text-5xl font-bold gradient-text">Trabajo Destacado</h2>
+                        </motion.div>
+                        <div className="grid lg:grid-cols-2 gap-8">
+                            {projects.map((project, i) => (
+                                <motion.div key={project.title} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.15, duration: 0.6 }} className={`glass-card rounded-3xl overflow-hidden card-hover ${project.featured ? 'lg:col-span-2' : ''}`}>
+                                    <div className={`relative h-48 md:h-64 overflow-hidden ${project.image ? '' : `bg-gradient-to-br ${project.gradient}`}`}>
+                                        {project.image ? (<><img src={project.image} alt={project.title} className="w-full h-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent opacity-80"></div></>) : (<div className="absolute inset-0 flex items-center justify-center"><div className="w-24 h-24 rounded-2xl glass flex items-center justify-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-cyan-400"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" /></svg></div></div>)}
+                                        {project.featured && <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-medium border border-cyan-400/30 backdrop-blur-sm">Destacado</div>}
+                                    </div>
+                                    <div className="p-8">
+                                        <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
+                                        <p className="text-white/50 mb-6 leading-relaxed">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2 mb-6">{project.tech.map((t) => (<span key={t} className="px-3 py-1 rounded-full bg-dark-700 text-white/60 text-sm border border-white/5">{t}</span>))}</div>
+                                        <div className="flex gap-4">
+                                            <motion.a href={project.demo || project.github} target="_blank" rel="noopener noreferrer" className="btn-glow px-6 py-3 rounded-xl bg-cyan-500/10 text-cyan-400 font-medium border border-cyan-400/20 hover:bg-cyan-500/20 cursor-pointer flex items-center gap-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>{project.demo ? 'Demo en Vivo' : 'Ver Demo'}</motion.a>
+                                            <motion.a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-glow px-6 py-3 rounded-xl glass text-white/60 font-medium border border-white/10 flex items-center gap-2 cursor-pointer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>Ver Código</motion.a>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Services
+        const Services = () => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+            const services = [
+                { title: 'Automatización de Procesos', description: 'Automatiza tareas repetitivas y flujos de trabajo con Python, reduciendo el esfuerzo manual y el error humano.', icon: '⚙️' },
+                { title: 'Automatización de Excel', description: 'Transforma procesos manuales de Excel en sistemas automatizados que ahorran horas de trabajo.', icon: '📊' },
+                { title: 'Dashboards de Negocios', description: 'Dashboards interactivos que visualizan KPIs y métricas para una mejor toma de decisiones.', icon: '📈' },
+                { title: 'Análisis de Datos', description: 'Extrae insights de tus datos a través de análisis avanzado y técnicas de visualización.', icon: '🔍' },
+                { title: 'Soluciones de IA', description: 'Implementa sistemas inteligentes potenciados por machine learning e inteligencia artificial generativa.', icon: '🤖' },
+                { title: 'Optimización SQL', description: 'Optimiza consultas de bases de datos y diseña arquitecturas de datos eficientes.', icon: '🗃️' },
+            ];
+            return (
+                <section id="services" className="relative py-32">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-16">
+                            <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Servicios</span>
+                            <h2 className="text-4xl md:text-5xl font-bold gradient-text">¿En qué puedo ayudarte?</h2>
+                        </motion.div>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {services.map((service, i) => (
+                                <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1, duration: 0.6 }} className="glass-card rounded-2xl p-8 card-hover group">
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><span className="text-2xl">{service.icon}</span></div>
+                                    <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">{service.title}</h3>
+                                    <p className="text-white/50 leading-relaxed">{service.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Contact with AJAX Form
+        const Contact = () => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+            const formRef = useRef(null);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [isSuccess, setIsSuccess] = useState(false);
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setIsSubmitting(true);
+                const form = formRef.current;
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch("https://formspree.io/f/maqpqeyq", {
+                        method: "POST",
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        form.reset();
+                        setIsSuccess(true);
+                        setTimeout(() => setIsSuccess(false), 5000);
+                    } else {
+                        alert('Hubo un error. Intenta de nuevo.');
+                    }
+                } catch (error) {
+                    alert('Error al enviar. Intenta de nuevo.');
+                } finally {
+                    setIsSubmitting(false);
+                }
+            };
+            return (
+                <section id="contact" className="relative py-32 section-gradient">
+                    <div className="max-w-4xl mx-auto px-6">
+                        <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-16">
+                            <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Contacto</span>
+                            <h2 className="text-4xl md:text-5xl font-bold gradient-text">Trabajemos Juntos</h2>
+                        </motion.div>
+                        <div className="grid md:grid-cols-2 gap-12">
+                            <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.2 }}>
+                                <h3 className="text-2xl font-semibold mb-6 text-white">Ponte en Contacto</h3>
+                                <p className="text-white/50 mb-8 leading-relaxed">¿Tienes un proyecto en mente o necesitas ayuda para automatizar tus flujos de trabajo? Me encantaría escucharte.</p>
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-xl glass flex items-center justify-center">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/40 text-sm">Email</p>
+                                            <a href="mailto:julioquispe.dev@gmail.com" className="text-white hover:text-cyan-400 transition-colors">julioquispe.dev@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-xl glass flex items-center justify-center">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                                        </div>
+                                        <div><p className="text-white/40 text-sm">Ubicación</p><p className="text-white">Disponible para oportunidades en Perú y remoto worldwide</p></div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                            <motion.form
+                                ref={formRef}
+                                onSubmit={handleSubmit}
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                transition={{ delay: 0.3 }}
+                                className="glass-card rounded-3xl p-8"
+                            >
+                                <div className="space-y-6">
+                                    <div className="form-group">
+                                        <label htmlFor="nombre" className="block text-white/60 text-sm mb-2">Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required className="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-white/30 transition-all" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="email" className="block text-white/60 text-sm mb-2">Email</label>
+                                        <input type="email" id="email" name="email" placeholder="tu@email.com" required className="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-white/30 transition-all" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="mensaje" className="block text-white/60 text-sm mb-2">Mensaje</label>
+                                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntame sobre tu proyecto..." rows="5" required className="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-white/30 transition-all resize-none"></textarea>
+                                    </div>
+                                    <motion.button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full btn-glow px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold disabled:opacity-50"
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.99 }}
+                                    >
+                                        {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                                    </motion.button>
+                                    {isSuccess && (
+                                        <div className="bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 px-4 py-3 rounded-xl text-center">
+                                            ¡Mensaje enviado con éxito! Te contactaré pronto.
+                                        </div>
+                                    )}
+                                </div>
+                            </motion.form>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer
+        const Footer = () => (
+            <footer className="py-12 border-t border-white/5">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="text-center md:text-left">
+                            <a href="#" className="text-xl font-bold"><span className="gradient-text">JQ</span><span className="text-white/80">.dev</span></a>
+                            <p className="text-white/40 text-sm mt-2">© 2026 Julio Cesar Quispe Garrido</p>
+                        </div>
+                        <div className="flex items-center gap-6">
+                            <motion.a href="https://linkedin.com/in/julio-cesar-quispe-garrido" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl glass flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors" whileHover={{ scale: 1.1, y: -2 }}><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></motion.a>
+                            <motion.a href="https://github.com/Julio-73" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl glass flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors" whileHover={{ scale: 1.1, y: -2 }}><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></motion.a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        // Main App
+        const App = () => (
+            <div className="relative">
+                <Navigation />
+                <Hero />
+                <About />
+                <TechStack />
+                <Projects />
+                <Services />
+                <Contact />
+                <Footer />
+            </div>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
+
+
+
+
