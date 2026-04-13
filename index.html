@@ -209,8 +209,13 @@
                             <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
                                 <span className="gradient-text-alt">Julio Cesar</span><br /><span className="gradient-text">Quispe Garrido</span>
                             </motion.h1>
-                            <motion.p className="text-lg md:text-xl text-cyan-400 font-medium mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>Ingeniero de Software | IA | Automatización | SQL</motion.p>
-                            <motion.p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>Construyo sistemas inteligentes que automatizan procesos, analizan datos y transforman la información empresarial en decisiones estratégicas.</motion.p>
+
+                           <motion.p className="text-lg md:text-xl text-cyan-400 font-medium mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>Ingeniero de Software | IA | Automatización | Desarrollador Full Stack</motion.p>
+                            
+
+                           <motion.p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>Construyo sistemas inteligentes que automatizan procesos, analizan datos y transforman la información. También desarrollo web y aplicaciones funcionales para resolver necesidades reales.</motion.p>
+                            
+                            
                             <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
                                 <motion.a href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }) }} className="btn-glow px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold cursor-pointer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>Ver Proyectos</motion.a>
                                 <motion.a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }} className="btn-glow px-8 py-4 rounded-xl glass text-white/80 font-semibold border border-white/10 hover:border-cyan-400/50 cursor-pointer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>Contáctame</motion.a>
@@ -236,17 +241,29 @@
                             <h2 className="text-4xl md:text-5xl font-bold mb-8"><span className="gradient-text">Creando Soluciones</span><br /><span className="gradient-text-alt">Inteligentes</span></h2>
                             <div className="grid md:grid-cols-2 gap-12 items-center">
                                 <div className="space-y-6">
-                                    <p className="text-lg text-white/60 leading-relaxed">Soy ingeniero de software especializado en construir sistemas inteligentes que transforman la forma en que las empresas operan. Mi enfoque está en desarrollar soluciones de automatización, pipelines de análisis de datos y aplicaciones potenciadas con IA.</p>
-                                    <p className="text-lg text-white/60 leading-relaxed">Con experiencia en Python, SQL y herramientas modernas de datos, creo sistemas que automatizan tareas repetitivas, extraen insights de conjuntos de datos complejos y potencian la toma de decisiones a través de dashboards interactivos.</p>
+                                    <p className="text-lg text-white/60 leading-relaxed">  Actualmente curso Ingeniería de Software con IA en SENATI, pero mi formación real comenzó hace 5 años como autodidacta. Desde entonces, he construido una base sólida aprendiendo tecnologías clave por mi cuenta — desde HTML, CSS y JavaScript para interfaces funcionales, hasta Python y SQL para automatización y análisis de datos. He desarrollado proyectos reales, resuelto problemas prácticos y aprendido a usar inteligencias artificiales como aliados para mejorar mi productividad y eficacia en el desarrollo.  </p>
+                                    <p className="text-lg text-white/60 leading-relaxed"> Mi enfoque está en automatizar procesos repetitivos, transformar datos en información útil y crear aplicaciones web que realmente funcionen — no solo se ven bien. Creo firmemente que el valor de un desarrollador no está en cuántas herramientas conoce, sino en cómo las usa para resolver necesidades concretas.  </p>
+                                    <p className="text-lg text-white/60 leading-relaxed">Valoro la claridad, la responsabilidad y el aprendizaje continuo. Busco oportunidades donde pueda aportar desde el primer día, crecer junto al equipo y dejar un impacto tangible.</p>
                                     <div className="pt-6">
                                         <div className="line-glow w-20 mb-6" />
-                                        <div className="grid grid-cols-3 gap-6">
-                                            {[ { num: '50+', label: 'Proyectos Completados' }, { num: '3+', label: 'Años de Experiencia' }, { num: '20+', label: 'Clientes' }].map((stat, i) => (
-                                                <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.1 }}>
-                                                    <span className="text-3xl font-bold gradient-text">{stat.num}</span><p className="text-white/40 text-sm mt-1">{stat.label}</p>
-                                                </motion.div>
-                                            ))}
-                                        </div>
+
+<div className="grid grid-cols-3 gap-6">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }}>
+        <span className="text-3xl font-bold gradient-text">15+</span>
+        <p className="text-white/40 text-sm mt-1">Proyectos Completados</p>
+    </motion.div>
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 }}>
+        <span className="text-3xl font-bold gradient-text">5</span>
+        <p className="text-white/40 text-sm mt-1">Años Aprendiendo</p>
+    </motion.div>
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 }}>
+        <span className="text-3xl font-bold gradient-text">∞</span>
+        <p className="text-white/40 text-sm mt-1">Ganas de Crecer</p>
+
+    </motion.div>
+</div>
+                                       
+
                                     </div>
                                 </div>
                                 <motion.div className="glass-card rounded-3xl p-8" initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.3 }}>
@@ -268,15 +285,56 @@
         };
 
         // Tech Stack
+
         const TechStack = () => {
             const ref = useRef(null);
             const isInView = useInView(ref, { once: true, margin: "-100px" });
-            const categories = [
-                { title: 'Lenguajes', items: [{ name: 'Python', icon: '🐍' }, { name: 'SQL', icon: '🗃️' }, { name: 'JavaScript', icon: '⚡' }] },
-                { title: 'Automatización y Datos', items: [{ name: 'Pandas', icon: '🐼' }, { name: 'ETL', icon: '🔄' }, { name: 'Automatización Excel', icon: '📊' }, { name: 'Análisis de Datos', icon: '📈' }] },
-                { title: 'IA y ML', items: [{ name: 'Machine Learning', icon: '🤖' }, { name: 'Generative AI', icon: '✨' }, { name: 'Automatización Inteligente', icon: '🧠' }] },
-                { title: 'Desarrollo', items: [{ name: 'Streamlit', icon: '🎯' }, { name: 'REST APIs', icon: '🔌' }, { name: 'Dashboards', icon: '📉' }] },
-            ];
+
+           const categories = [
+    { 
+        title: 'Lenguajes', 
+        items: [
+            { name: 'Python', icon: '🐍' }, 
+            { name: 'SQL', icon: '🗃️' }, 
+            { name: 'JavaScript', icon: '⚡' },
+            { name: 'HTML5', icon: '🌐' },
+            { name: 'CSS3', icon: '🎨' }
+        ] 
+    },
+    { 
+        title: 'Automatización y Datos', 
+        items: [
+            { name: 'Pandas', icon: '🐼' }, 
+            { name: 'ETL', icon: '🔄' }, 
+            { name: 'Auto Exel ', icon: '📊' }, 
+            { name: 'Análisis de Datos', icon: '📈' }
+        ] 
+    },
+    { 
+        title: 'IA y ML', 
+        items: [
+            { name: 'Machine Learning', icon: '🤖' }, 
+            { name: 'Generative AI', icon: '✨' }, 
+            { name: 'Auto Inteligente', icon: '🧠' }
+        ] 
+    },
+    { 
+        title: 'Desarrollo', 
+        items: [
+            { name: 'Streamlit', icon: '🎯' }, 
+            { name: 'REST APIs', icon: '🔌' }, 
+            { name: 'Dashboards', icon: '📉' }
+        ] 
+    },
+    { 
+        title: 'Herramientas', 
+        items: [
+            { name: 'Git', icon: '🔗' }, 
+            { name: 'GitHub', icon: '💻' }, 
+            { name: 'VS Code', icon: '️' }
+        ] 
+    },
+];
             return (
                 <section id="tech-stack" className="relative py-32">
                     <div className="max-w-6xl mx-auto px-6">
@@ -284,7 +342,9 @@
                             <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Tech Stack</span>
                             <h2 className="text-4xl md:text-5xl font-bold gradient-text">Tecnologías que Utilizo</h2>
                         </motion.div>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                       <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+
                             {categories.map((category, ci) => (
                                 <motion.div key={category.title} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: ci * 0.1, duration: 0.6 }} className="glass-card rounded-2xl p-6 card-hover">
                                     <h3 className="text-lg font-semibold mb-6 text-white/90">{category.title}</h3>
@@ -303,9 +363,11 @@
             const isInView = useInView(ref, { once: true, margin: "-100px" });
             const projects = [
                 { title: 'Dashboard Inteligente de Control Logístico', description: 'Dashboard empresarial construido para monitorear operaciones logísticas en tiempo real, automatizar reportes y generar alertas inteligentes.', tech: ['Python', 'SQL', 'Pandas', 'Streamlit'], featured: true, image: 'https://z-cdn-media.chatglm.cn/files/86d30e9d-3b70-4b83-a7b6-fc9bdbd81475.png?auth_key=1873026105-d6d114e1ef0641a7b2f39f6dca5f5b80-0-f0d3180fefb312b1f4c3649c6c82c235', demo: 'https://sistema-logistico.streamlit.app', github: 'https://github.com/Julio-73/Sistema-Inteligente-de-Control-Operativo-Log-stico-' },
-                { title: 'Generador Automatizado de Reportes', description: 'Sistema que automatiza la creación y distribución de reportes empresariales, reduciendo el trabajo manual en 80%.', tech: ['Python', 'Excel', 'Email API'], gradient: 'from-emerald-500/20 to-cyan-500/20', github: 'https://github.com/Julio-73' },
-                { title: 'Pipeline de Análisis de Datos', description: 'Pipeline ETL para procesar y analizar grandes volúmenes de datos, generando insights accionables para el negocio.', tech: ['Python', 'Pandas', 'SQL', 'PostgreSQL'], gradient: 'from-cyan-500/20 to-blue-500/20', github: 'https://github.com/Julio-73' },
-            ];
+                { title: 'App de Principios Básicos', description: 'Aplicación web progresiva (PWA) para enseñar los principios básicos de la Biblia. Funciona completamente offline gracias a Service Workers.', tech: ['HTML5', 'CSS3', 'JavaScript', 'PWA', 'Service Workers'], image: 'https://github.com/Julio-73/App-Principios-Basicos-/blob/main/WhatsApp%20Image%202026-04-14%20at%2000.37.04.jpeg?raw=true',  demo: 'https://julio-73.github.io/App-Principios-Basicos-/',  github: 'https://github.com/Julio-73/App-Principios-Basicos-' },
+                { title: 'App de Mensaje Automatizado', description: 'Aplicación web para enviar mensajes automáticos con imágenes bíblicas a contactos de WhatsApp. Permite programar envíos y personalizar contenido para compartir inspiración diaria.', tech: ['HTML5', 'CSS3', 'JavaScript', 'WhatsApp Web', 'DOM Manipulation'], image: 'https://github.com/Julio-73/estudio-biblico/blob/main/WhatsApp%20Image%202026-04-14%20at%2000.35.32.jpeg?raw=true',   demo: 'https://julio-73.github.io/estudio-biblico/',   github: 'https://github.com/Julio-73/estudio-biblico' },
+                { title: 'Space Warriors', description: ' Juego épico de naves espaciales compatible con PC y móvil, creado con HTML5 Canvas. Incluye 4 modos de juego, 7 tipos de enemigos con IA única, 8 power-ups épicos, sistema de logros desbloqueables y banda sonora generada proceduralmente.',  tech: ['HTML5', 'CSS3', 'JavaScript', 'Canvas API', 'Game Dev', 'Responsive Design'], image:' https://github.com/Julio-73/Space-warriors/blob/main/WhatsApp%20Image%202026-04-14%20at%2000.54.34.jpeg?raw=true',  demo: 'https://julio-73.github.io/Space-warriors/', github: 'https://github.com/Julio-73/Space-warriors'}
+            ]
+
             return (
                 <section id="projects" className="relative py-32 section-gradient">
                     <div className="max-w-6xl mx-auto px-6">
@@ -337,18 +399,41 @@
             );
         };
 
+   
         // Services
         const Services = () => {
             const ref = useRef(null);
             const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+            // ¡IMPORTANTE! El array debe estar DENTRO de la función
             const services = [
-                { title: 'Automatización de Procesos', description: 'Automatiza tareas repetitivas y flujos de trabajo con Python, reduciendo el esfuerzo manual y el error humano.', icon: '⚙️' },
-                { title: 'Automatización de Excel', description: 'Transforma procesos manuales de Excel en sistemas automatizados que ahorran horas de trabajo.', icon: '📊' },
-                { title: 'Dashboards de Negocios', description: 'Dashboards interactivos que visualizan KPIs y métricas para una mejor toma de decisiones.', icon: '📈' },
-                { title: 'Análisis de Datos', description: 'Extrae insights de tus datos a través de análisis avanzado y técnicas de visualización.', icon: '🔍' },
-                { title: 'Soluciones de IA', description: 'Implementa sistemas inteligentes potenciados por machine learning e inteligencia artificial generativa.', icon: '🤖' },
-                { title: 'Optimización SQL', description: 'Optimiza consultas de bases de datos y diseña arquitecturas de datos eficientes.', icon: '🗃️' },
+                {
+                    title: 'Automatización de Procesos',
+                    description: 'Automatiza tareas repetitivas y flujos de trabajo con Python, reduciendo el esfuerzo manual y el error humano.',
+                    icon: '⚙️'
+                },
+                {
+                    title: 'Automatización de Excel',
+                    description: 'Transforma procesos manuales de Excel en sistemas automatizados que ahorran horas de trabajo.',
+                    icon: '📊'
+                },
+                {
+                    title: 'Dashboards de Negocios',
+                    description: 'Dashboards interactivos que visualizan KPIs y métricas para una mejor toma de decisiones.',
+                    icon: '📈'
+                },
+                {
+                    title: 'Desarrollo de Aplicaciones Web',
+                    description: 'Creación de sitios web y aplicaciones modernas, responsivas y optimizadas para ofrecer la mejor experiencia de usuario.',
+                    icon: '💻'
+                },
+                {
+                    title: 'Soluciones de IA',
+                    description: 'Implementa sistemas inteligentes potenciados por machine learning e inteligencia artificial generativa.',
+                    icon: '🤖'
+                }
             ];
+
             return (
                 <section id="services" className="relative py-32">
                     <div className="max-w-6xl mx-auto px-6">
@@ -356,7 +441,7 @@
                             <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase mb-4 block">Servicios</span>
                             <h2 className="text-4xl md:text-5xl font-bold gradient-text">¿En qué puedo ayudarte?</h2>
                         </motion.div>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
                             {services.map((service, i) => (
                                 <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1, duration: 0.6 }} className="glass-card rounded-2xl p-8 card-hover group">
                                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><span className="text-2xl">{service.icon}</span></div>
@@ -369,6 +454,9 @@
                 </section>
             );
         };
+
+
+
 
         // Contact with AJAX Form
         const Contact = () => {
@@ -508,6 +596,11 @@
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
+
+
+
+
+
 </html>
 
 
